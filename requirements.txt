@@ -1,0 +1,6 @@
+asgiref==3.6.0
+Django==3.2
+django-froala-editor==4.0.18
+pytz==2023.2
+six==1.16.0
+sqlparse==0.4.3

@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/django
+      - output:/django/output
+    ports:
+      - 8000:8000
+    image: app:django
+    container_name: django_container
+    command: sh -c "python manage.py runserver 0.0.0.0:8000 & python3 app.py > /django/output/output.txt 2>&1"
+  ccompiler:
+    build: ./ccompiler
+    volumes:
+      - .:/app
+      - output:/app/output
+    command: sh -c "gcc hello.c -o hello && ./hello > /app/output/output2.txt 2>&1"
+  cppcompiler:
+    build: ./cppcompiler
+    volumes:
+      - .:/app
+      - output:/app/output
+    command: sh -c "g++ world.cpp -o world && ./world > /app/output/output3.txt 2>&1"
+
+volumes:
+  output:
